@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <title>Live statue status messages</title>
+        <script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+        <script type="text/javascript" charset="utf-8">
+            var socket;
+            $(document).ready(function(){
+                socket = io.connect('http://' + document.domain + ':' + location.port + '/live');
+                socket.on('connect', function() {
+                    socket.emit('joined', {});
+                });
+                socket.on('message', function(data) {
+                    $('#messages').val($('#messages').val() + data.msg + '\n');
+                    $('#messages').scrollTop($('#messages')[0].scrollHeight);
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Live statue status messages</h1>
+        <textarea id="messages" cols="120" rows="40"></textarea><br><br>
+    </body>
+</html>
