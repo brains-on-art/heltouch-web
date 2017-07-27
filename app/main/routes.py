@@ -1,5 +1,5 @@
 # from flask import session, redirect, url_for, render_template, request, jsonify
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify, current_app
 from . import main
 from .. import socketio
 import json
@@ -19,7 +19,7 @@ def index():
 def lattice():
     """Accept a lattice as a POST"""
     payload = json.loads(str(request.data, 'utf-8'))
-    # print(payload)
-    # print(type(payload))
-    socketio.emit('message', {'msg':payload['lattice']}, namespace='/live')
+    msg = payload.get('lattice')
+    socketio.emit('message', {'msg':msg}, namespace='/live', include_self=True)
+    current_app.logger.info("MESSAGE {}".format(msg))
     return jsonify({'success': True}), 200
