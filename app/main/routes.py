@@ -18,8 +18,13 @@ def index():
 @main.route('/lattice', methods=['POST'])
 def lattice():
     """Accept a lattice as a POST"""
-    payload = json.loads(str(request.data, 'utf-8'))
-    msg = payload.get('lattice')
-    socketio.emit('message', {'msg':msg}, namespace='/live', include_self=True)
-    current_app.logger.info("MESSAGE {}".format(msg))
-    return jsonify({'success': True}), 200
+    print(request.files)
+    try:
+        payload = json.loads(str(request.data, 'utf-8'))
+        msg = payload.get('lattice')
+        socketio.emit('message', {'msg':msg}, namespace='/live', include_self=True)
+        current_app.logger.info("MESSAGE {}".format(msg))
+        return jsonify({'success': True}), 200
+    except Exception as e:
+        current_app.logger.warning("FAILED POST")
+        return jsonify({'success': False}), 400
