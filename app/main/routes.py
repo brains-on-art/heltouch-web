@@ -23,7 +23,7 @@ def image():
         request.files['image'].save(fname)
         result = img_tasks.read_img_detect_circles(fname)
         print(result)
-        current_app.logger.info("POST {}".format(request.files))
+        current_app.logger.info("POST {}".format(result))
         return jsonify({'success': True}), 200
     else:
         current_app.logger.warning("IMAGE POST FAILED")
