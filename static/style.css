@@ -1,0 +1,50 @@
+h1 {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    font-family: Helvetica
+}
+p {
+    font-family: Times
+}
+
+#infobox, #wrapper {
+    text-align: center;
+}
+#map, #info {
+    display: inline-block;
+}
+#map {
+    width: 60%;
+    min-width: 810px;
+    height: 55%;
+    min-height: 515px;
+}
+#info {
+    width: 60%;
+}
+
+.default_ring {
+    border: 2px solid #444;
+     -webkit-border-radius: 30px;
+     height: 10px;
+     width: 10px;
+     /*-webkit-animation: pulsate 2s ease-out;
+     -webkit-animation-iteration-count: infinite;*/
+}
+
+.animated_ring {
+    border: 2px solid #444;
+     -webkit-border-radius: 30px;
+     height: 10px;
+     width: 10px;
+    -webkit-animation: pulsate 2s ease-out;*/
+    -webkit-animation-iteration-count: 1;
+}
+
+@-webkit-keyframes pulsate {
+        /*25% {-webkit-transform: scale(1.2, 1.2); opacity: 0.9;}
+        50% {-webkit-transform: scale(1, 1); opacity: 1.0;}*/
+        5% {-webkit-transform: scale(0.5, 0.5); opacity: 1;}
+        100% {-webkit-transform: scale(3, 3); opacity: 0.1;}
+}
