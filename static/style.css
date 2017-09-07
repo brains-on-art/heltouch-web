@@ -3,6 +3,7 @@ h1 {
     text-align: center;
     display: inline-block;
     font-family: Helvetica
+    font-size: 6em;
 }
 p {
     font-family: Times
@@ -22,6 +23,10 @@ p {
 }
 #info {
     width: 60%;
+}
+
+#map-placeholder {
+    width: 800px;
 }
 
 .default_ring {
