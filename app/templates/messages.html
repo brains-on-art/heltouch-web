@@ -1,6 +1,7 @@
+<meta charset="utf-8">
 <html>
     <head>
-        <title>Live statue status messages</title>
+        <title>Play your Helsinki</title>
         <script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
         <script type="text/javascript" src="//dev.hel.fi/~kotkanen/scripts/Leaflet.helsinki-tiles.min.js"></script>
@@ -31,8 +32,26 @@
         </script>
         <style>
 
-            .css-icon, .default-icon {
+            h1 {
+                width: 100%;
+                text-align: center;
+                display: inline-block;
+            }
 
+            #infobox, #wrapper {
+                text-align: center;
+            }
+            #map, #info {
+                display: inline-block;
+            }
+            #map {
+                width: 60%;
+                min-width: 810px;
+                height: 55%;
+                min-height: 515px;
+            }
+            #info {
+                width: 60%;
             }
 
             .default_ring {
@@ -62,12 +81,21 @@
         </style>
     </head>
     <body>
-        <h1>Live statue status messages</h1>
+        <h1>Play your Helsinki</h1>
 
-        <div id="infobox" style="width:100%; height:2em;">
+        <!-- <div id="infobox" style="width:100%; height:2em;">
             <div id="messages">messages here</div>
+        </div> -->
+        <div id="wrapper">
+            <div id="map"></div>
+            <div id="info">
+                <p>Play your Helsinki kutsuu vierailijan jakamaan kokemuksensa Helsingistä ja osallistumaan keskusteluun siitä, mikä on itselle tärkeintä kaupungissamme, mutta myös ottamaan kantaa sen suunnitteluun ja infrastruktuuriin. Teoksen tarkoituksena on herättää pohdiskelua, muistoja ja mielipiteitä mutta myös innostaa jakamaan tarinoita Helsingistä kävijöiden kesken. Teos koostuu sadoista metalliputkista, jotka soivat kirkonkellojen tapaan niiden keinuessa. Putkien liikkeestä kerätty tieto prosessoidaan, tallennetaan ja visualisoidaan sähköisesti installaation verkkosivuilla, joilta voi seurata miten kävijät ovat vuorovaikuttaneet teoksen kanssa. Kertyneessä datassa on oma paikkansa myös sattumanvaraisuudella ja luonnon vaikutuksella, mikä herättää kysymyksen tilastojen tarkkuudesta. Kuinka hyvin inhimilliset tekijät ovat loppujen lopuksi mitattavissa tai ennustettavissa?</p>
+
+                <p>Play your Helsinki -teoksen on suunnitellut ja toteuttanut <a href="http://www.pajabureau.fi/">Paja&Bureau</a> ja <a href="http://brainsonart.wordpress.com">Brains on Art</a>.</p>
+
+                <p>Installaatio on osa HDW HOP -kaupunki-installaatioiden sarjaa.</p>
+            </div>
         </div>
-        <div id="map" style="width:100%; height:100%;"></div>
 
         <script>
             // taken from http://jsfiddle.net/christianjunk/waturuoz/
@@ -88,10 +116,10 @@
                 // ,iconAnchor: [11,11]
             });
 
-            var map = L.map.Helsinki("map", {crs: "tm35", center:[60.2, 25.005], zoom:9});
+            var map = L.map.Helsinki("map", {crs: "tm35", center:[60.2, 25.005], zoom:8, zoomControl: false});
             var servicemapBg = L.tileLayer.Helsinki("servicemap");
             servicemapBg.addTo(map);
-            map.setView([60.2,25.005], 9); //TODO fix merging init opts instead of setview
+            map.setView([60.21,25.005], 8); //TODO fix merging init opts instead of setview
 
             L.markers =  [];
             for (var i=0; i<20; i++) {
@@ -103,6 +131,19 @@
                 }
                 L.markers.push(row);
             }
+
+            // disable interactions
+            // map.dragging.disable();
+            // map.touchZoom.disable();
+            // map.doubleClickZoom.disable();
+            // map.scrollWheelZoom.disable();
+            // map.boxZoom.disable();
+            // map.keyboard.disable();
+            // if (map.tap) map.tap.disable();
+            map._handlers.forEach(function(handler) {
+                handler.disable();
+            });
+            document.getElementById('map').style.cursor='default';
 
             function animateIcon (x, y) {
                 console.log(x,y);
