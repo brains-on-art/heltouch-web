@@ -1,12 +1,17 @@
 h1 {
+    font-size: 6em;
+    margin-bottom: 0px;
+    color: #00649f;
+}
+
+h1, small {
     width: 100%;
     text-align: center;
     display: inline-block;
-    font-family: Helvetica;
-    font-size: 6em;
+    font-family: Helvetica, sans-serif;
 }
 p {
-    font-family: Times
+    font-family: Times, serif
 }
 
 #infobox, #wrapper {
@@ -22,7 +27,9 @@ p {
     min-height: 515px;
 }
 #info {
-    width: 60%;
+    max-width:400px;
+    padding: 40px;
+    margin-top: 20px;
 }
 
 #map-placeholder {
